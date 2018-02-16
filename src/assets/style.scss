@@ -1,0 +1,50 @@
+$height-header: 100vh;
+$width-header: 100%;
+$padding-header: 4rem;
+$min-height-header: 0;
+$font-size: 2rem;
+$font-color-header: #fff;
+$bg-color-header: #FFA000;
+$margin-bottom-portfolio: 30px;
+$font-size-portfolio: 1.2rem;
+$margin-top-content: 20px;
+$margin-header-font: 0px 0px 20px;
+$padding-loader: 40px;
+
+.header {
+	height: $height-header;
+	position: relative;
+	min-height: $min-height-header;
+    display: flex;
+    width: $width-header;
+    height: auto;
+    padding-top: $padding-header;
+    padding-bottom: $padding-header;
+    background: $bg-color-header;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.header h1 {
+	font-size: $font-size;
+	color: $font-color-header;
+	margin: $margin-header-font;
+}
+.text-center {
+	text-align: center;
+}
+.breadcrumb {
+	background: transparent !important;
+}
+.portfolio-item {
+	margin-bottom: $margin-bottom-portfolio;
+}
+.portfolio-item h2 {
+	font-size: $font-size-portfolio;
+}
+.margin-content {
+	margin-top: $margin-top-content;
+}
+.loader {
+	padding: $padding-loader;
+}
