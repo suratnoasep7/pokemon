@@ -1,7 +1,7 @@
 {
-  "name": "my-project",
+  "name": "Pokemon",
   "version": "1.0.0",
-  "description": "testproject",
+  "description": "Pokemon",
   "author": "Asep",
   "private": true,
   "scripts": {
@@ -18,7 +18,8 @@
     "bootstrap-vue": "^2.0.0-rc.1",
     "sass-loader": "^6.0.6",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuejs-paginator": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

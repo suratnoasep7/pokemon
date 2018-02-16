@@ -1,18 +1,31 @@
 <template>
   <div>
-    <nav class="navbar navbar-light bg-light static-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" v-bind:href="'/#/'">{{ msg }}</a>
-        <a class="btn btn-primary" v-bind:href="'/#/type/'">{{ msgtipe }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/type/'">{{ msgtipe }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/login/'">{{ msgLogin }}</a>
+            </li>
+          </ul>
+        </div>      
       </div>
     </nav>
     <div class="header">
       <div class="container text-center">
-        <h1>Cari Pokemon</h1>
+        <h1>{{ msgTitleHeader }}</h1>
         <div class="form-row">
           <div class="col-md-3">
             <select v-model="selectedtipe" class="form-control">
-              <option disabled="" value="">Pilih Tipe</option>
+              <option disabled="" value="">{{ msgPilihTipe }}</option>
               <option v-for="option in options" v-bind:value="option">
                 {{ option }}
               </option>
@@ -20,7 +33,7 @@
           </div>
           <div class="col-md-3">
             <select v-model="selectedsubtipe" class="form-control">
-              <option disabled="" value="">Pilih Sub Tipe</option>
+              <option disabled="" value="">{{ msgSubTipe }}</option>
               <option v-for="optionsubtipe in optionssubtipe" v-bind:value="optionsubtipe">
                 {{ optionsubtipe }}
               </option>
@@ -28,14 +41,14 @@
           </div>
           <div class="col-md-3">
             <select v-model="selectedsupertipe" class="form-control">
-              <option disabled="" value="">Pilih Super Tipe</option>
+              <option disabled="" value="">{{ msgSuperTipe }}</option>
               <option v-for="optionsupertipe in optionssupertipe" v-bind:value="optionsupertipe">
                 {{ optionsupertipe }}
               </option>
             </select>
           </div>
           <div class="col-md-3">
-            <button @click="searchPokemon(selectedtipe, selectedsubtipe, selectedsupertipe)" class="btn btn-block btn-primary">Cari</button>
+            <button @click="searchPokemon(selectedtipe, selectedsubtipe, selectedsupertipe)" class="btn btn-block btn-primary">{{ msgCari }}</button>
           </div>
         </div>
       </div>
@@ -59,80 +72,91 @@
 
 <script>
 import {AXIOS} from './http-common'
+import VuePaginator from 'vuejs-paginator'
 
 export default {
   name: 'HelloWorld',
   data () {
-      return {
-        msg: 'Pokemon',
-        message: '',
-        msgtipe: 'Tipe Pokemon',
-        selectedtipe: '',
-        selectedsubtipe: '',
-        selectedsupertipe: '',
-        response: [],
-        options: [],
-        optionssubtipe: [],
-        optionssupertipe: [],
-        errors: [],
-        errorsoptions: [],
-        errorsoptionssubtipe: [],
-        errorsoptionssupertipe: [],
-        loading: true
-      }
-    },
-    created () {
-      this.callRestService()
-    },
-    watch: {
-      '$route': 'callRestService'
-    },
-    methods: {
-      // Fetches posts when the component is created.
-      callRestService () {
-        AXIOS.get('cards?abilityName=&abilityText=&abilityType=&ancientTrait=&artist=&attackCost=&attackDamage=&attackName=&attackText=&contains=&hp=&id=&name=&nationalPokedexNumber=&number=&page=&pageSize=&rarity=&resistances=&retreatCost=&series=&set=&setCode=&subtype=&supertype=&text=&types=&weaknesses=')
-          .then(response => {
-            // JSON responses are automatically parsed.
-            if (response.data.cards.length > 0) {
-              this.loading = false
-              this.response = response.data.cards
-            }
-            
-          })
-          .catch(e => {
+    return {
+      msg: 'Pokemon',
+      msglogin: 'Login',
+      msgPilihTipe: 'Pilih Tipe',
+      msgSubTipe: 'Pilih Sub Tipe',
+      msgtipe: 'Tipe Pokemon',
+      msgSuperTipe: 'Pilih Super Tipe',
+      msgCari: 'Cari',
+      msgLogin: 'Login',
+      msgTitleHeader: 'Cari Pokemon',
+      selectedtipe: '',
+      selectedsubtipe: '',
+      selectedsupertipe: '',
+      response: [],
+      options: [],
+      optionssubtipe: [],
+      optionssupertipe: [],
+      errors: [],
+      errorsoptions: [],
+      errorsoptionssubtipe: [],
+      errorsoptionssupertipe: [],
+      loading: true
+    }
+  },
+  created () {
+    this.callRestService()
+  },
+  watch: {
+    '$route': 'callRestService'
+  },
+  methods: {    
+    callRestService () {
+      AXIOS.get('cards?abilityName=&abilityText=&abilityType=&ancientTrait=&artist=&attackCost=&attackDamage=&attackName=&attackText=&contains=&hp=&id=&name=&nationalPokedexNumber=&number=&page=&pageSize=&rarity=&resistances=&retreatCost=&series=&set=&setCode=&subtype=&supertype=&text=&types=&weaknesses=').then(
+        response => {
+          if (response.data.cards.length > 0) {
+            this.loading = false
+            this.response = response.data.cards
+          }      
+        }).catch(
+          e => {
             this.errors.push(e)
-          })
-          AXIOS.get('types')
-          .then(response => {
-            // JSON responses are automatically parsed.
-            this.options = response.data.types
-          })
-          .catch(e => {
+          }
+        )
+
+      AXIOS.get('types').then(
+        response => {
+          this.options = response.data.types
+        }).catch(
+          e => {
             this.errorsoptions.push(e)
-          })
-          AXIOS.get('subtypes')
-          .then(response => {
-            // JSON responses are automatically parsed.
-            this.optionssubtipe = response.data.subtypes
-          })
-          .catch(e => {
-            this.errorsoptionssubtipe.push(e)
-          })
-          AXIOS.get('supertypes')
-          .then(response => {
-            // JSON responses are automatically parsed.
-            this.optionssupertipe = response.data.supertypes
-          })
-          .catch(e => {
-            this.errorsoptionssupertipe.push(e)
-          })
-      },
-      searchPokemon(type, subtype, supertype) {
-        if (type !== "" && subtype !== "" && supertype !== "") {
-          this.$router.push({path: '/singleimage/'+type+'/'+subtype+'/'+supertype})
+          }
+        )
+
+      AXIOS.get('subtypes').then(
+        response => {
+          this.optionssubtipe = response.data.subtypes
         }
-        
+      ).catch(
+        e => {
+          this.errorsoptionssubtipe.push(e)
+        }
+      )
+          
+      AXIOS.get('supertypes').then(
+        response => {
+          this.optionssupertipe = response.data.supertypes
+        }
+      ).catch(
+        e => {
+          this.errorsoptionssupertipe.push(e)
+        }
+      )
+    },
+    searchPokemon(type, subtype, supertype) {
+      if (type !== "" && subtype !== "" && supertype !== "") {
+        this.$router.push({path: '/singleimage/'+type+'/'+subtype+'/'+supertype})
+      } else {
+        alert('Pilih Pencarian')
       }
     }
+  }
 }
 </script>

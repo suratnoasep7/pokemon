@@ -11,6 +11,10 @@ $margin-top-content: 20px;
 $margin-header-font: 0px 0px 20px;
 $padding-loader: 40px;
 $time-animation: 1s;
+$login-height: 100vh;
+$header-top-login: 25vh;
+$header-left-login: 50vh;
+$padding-login: 20px;
 
 .header {
 	height: $height-header;
@@ -72,4 +76,18 @@ to {
   animation-fill-mode: both;
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+}
+.login {
+	min-height: $login-height;
+	background: $bg-color-header;
+}
+.content-login {
+	position: relative;
+	top: $header-top-login;
+	left: $header-left-login;
+}
+.form-row form {
+	width: $width-header;
+	background: $font-color-header;
+	padding: $padding-login;
 }

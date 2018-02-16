@@ -6,6 +6,8 @@ import SubType from '@/components/SubType'
 import SuperType from '@/components/SuperType'
 import SingleImage from '@/components/SingleImage'
 import DetailImage from '@/components/DetailImage'
+import Login from '@/components/Login'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
@@ -43,6 +45,16 @@ export default new Router({
       path: '/detailimage/:id',
       name: 'DetailImage',
       component: DetailImage
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     }
   ]
 })

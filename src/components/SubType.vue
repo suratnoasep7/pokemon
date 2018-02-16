@@ -1,15 +1,28 @@
 <template>
   <div class="hello">
-    <nav class="navbar navbar-light bg-light static-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" v-bind:href="'/#/'">Pokemon</a>
-        <a class="btn btn-primary" v-bind:href="'/#/'">Home</a>
+        <a class="navbar-brand" v-bind:href="'/#/'">{{ msg }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/type/'">{{ msgtipe }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/login/'">{{ msgLogin }}</a>
+            </li>
+          </ul>
+        </div>      
       </div>
     </nav>
     <div class="container margin-content">
       <div class="row">
         <div class="col-md-9">
-          <h1>{{ msg }}</h1>
+          <h1>{{ msgHome }}</h1>
         </div> 
       </div>
     </div>
@@ -37,35 +50,37 @@ import {AXIOS} from './http-common'
 export default {
   name: 'SubType',
   data () {
-      return {
-        msg: 'Sub Tipe Pokemon',
-        loading: true,
-        response: [],
-        errors: []
-      }
-    },
-    created () {
-      this.callRestService()
-    },
-    watch: {
-      '$route': 'callRestService'
-    },
-    methods: {
-      // Fetches posts when the component is created.
-      callRestService () {
-        AXIOS.get('subtypes')
-          .then(response => {
-            if (response.data.subtypes.length > 0) {
-              this.loading = false
-              this.response = response.data.subtypes
-            }
-            // JSON responses are automatically parsed.
-            
-          })
-          .catch(e => {
-            this.errors.push(e)
-          })
-      }
+    return {
+      msgHome: 'Sub Tipe Pokemon',
+      msg: 'Pokemon',
+      msgtipe: 'Tipe Pokemon',
+      msgLogin: 'Login',
+      loading: true,
+      response: [],
+      errors: []
     }
+  },
+  created () {
+    this.callRestService()
+  },
+  watch: {
+    '$route': 'callRestService'
+  },
+  methods: {
+    callRestService () {
+      AXIOS.get('subtypes').then(
+        response => {
+          if (response.data.subtypes.length > 0) {
+            this.loading = false
+            this.response = response.data.subtypes
+          }
+        }
+      ).catch(
+        e => {
+          this.errors.push(e)
+        }
+      )
+    }
+  }
 }
 </script>
