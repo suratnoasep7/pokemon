@@ -31,7 +31,7 @@
     <div class="container margin-content">
       <div class="col-md-12">
         <h1>{{ msg }}</h1>
-        <p>{{ msgTipe }} - {{ $attrs.type}} / {{ msgSubTipe }} - {{ $attrs.subtype }} / {{ msgSuperTipe }} - {{ $attrs.supertype }}</p>
+        <p>{{ msgTipe }} - {{ $attrs.type}} / {{ msgTextSub }} - {{ $attrs.subtype }} / {{ msgTextSuper }} - {{ $attrs.supertype }}</p>
         <p></p>
       </div>
       <div class="col-md-12 margin-content">
@@ -113,6 +113,8 @@ export default {
       msgWeak: 'Weaknesses',
       msgView: 'View Pokemon',
       msgPilihTipe: 'Pilih Tipe',
+      msgTextSub: 'Sub Tipe',
+      msgTextSuper: 'Super Tipe',
       msgSubTipe: 'Pilih Sub Tipe',
       msgSuperTipe: 'Pilih Super Tipe',
       msgCari: 'Cari',
