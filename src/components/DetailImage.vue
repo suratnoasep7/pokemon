@@ -13,6 +13,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/subtype/'">{{ msgsubtipe }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/supertype/'">{{ msgsupertipe }}
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" v-bind:href="'/#/login/'">{{ msgLogin }}</a>
             </li>
           </ul>
@@ -36,7 +44,7 @@
           <div class="col-md-8">
             <div class="row">
               <div class="col-md-4">
-                <img class="img-fluid rounded mb-3 mb-md-0 lazy-img-fadein" v-lazy="response.imageUrl">
+                <img class="img-fluid rounded mb-3 mb-md-0 lazy-img-fadein" v-lazy="response.imageUrl" lazy="loading">
               </div>
               <div class="col-md-8">
                 <p>Artist - {{ response.artist }}</p>
@@ -46,15 +54,15 @@
               </div>  
             </div>
             <!-- <div class="col-md-12 margin-content">
-                 <div v-if="loadingdetail" class="loader text-center">
-                   <img src="./../assets/loader-large.gif" alt="loader">
-                 </div>
-               </div>
-               <div class="col-lg-3 col-md-4 col-xs-6" v-for="itemdetail in responsedetail" v-if="!loadingdetail">
-                 <a v-bind:href="'/#/detailimage/'+ itemdetail.id" class="d-block mb-4 h-100">
-                   <img class="img-fluid img-thumbnail lazy-img-fadein" alt="itemdetail.name" v-lazy='itemdetail.imageUrl' lazy="loaded">
-                 </a>
-               </div> -->   
+                          <div v-if="loadingdetail" class="loader text-center">
+                            <img src="./../assets/loader-large.gif" alt="loader">
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-xs-6" v-for="itemdetail in responsedetail" v-if="!loadingdetail">
+                          <a v-bind:href="'/#/detailimage/'+ itemdetail.id" class="d-block mb-4 h-100">
+                            <img class="img-fluid img-thumbnail lazy-img-fadein" alt="itemdetail.name" v-lazy='itemdetail.imageUrl' lazy="loaded">
+                          </a>
+                        </div> -->   
           </div>
           <div class="col-md-4">
             <div class="card my-4">
@@ -106,10 +114,11 @@ export default {
     return {
       msg: 'Pokemon',
       msgtipe: 'Tipe Pokemon',
+      msgsubtipe: 'SubTipe Pokemon',
+      msgsupertipe: 'SuperTipe Pokemon',
       msgLogin: 'Login',
       msgPilihTipe: 'Pilih Tipe',
       msgSubTipe: 'Pilih Sub Tipe',
-      msgtipe: 'Tipe Pokemon',
       msgSuperTipe: 'Pilih Super Tipe',
       msgCari: 'Cari',
       loading: true,
@@ -197,7 +206,13 @@ export default {
       )
     },
     searchPokemon(type, subtype, supertype) {
-      if (type !== "" && subtype !== "" && supertype !== "") {
+      if (type !== "" && subtype == "" && supertype == "") {
+        this.$router.push({path: '/typepokemon/'+type})
+      } else if (type == "" && subtype !== "" && supertype == "") {
+        this.$router.push({path: '/subtypepokemon/'+subtype})
+      } else if (type == "" && subtype == "" && supertype !== "") {
+        this.$router.push({path: '/supertypepokemon/'+subtype})
+      } else if (type !== "" && subtype !== "" && supertype !== "") {
         this.$router.push({path: '/singleimage/'+type+'/'+subtype+'/'+supertype})
       } else {
         alert('Pilih Pencarian')

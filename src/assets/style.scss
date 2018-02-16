@@ -15,6 +15,7 @@ $login-height: 100vh;
 $header-top-login: 25vh;
 $header-left-login: 50vh;
 $padding-login: 20px;
+$width-lazy-img: 40px;
 
 .header {
 	height: $height-header;
@@ -69,7 +70,31 @@ to {
     opacity: 1;
 }
 }
+
 .lazy-img-fadein[lazy=loaded] {
+  -webkit-animation-duration: $time-animation;
+  animation-duration: $time-animation;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+.lazy-img-fadein[lazy=loading] {
+  width: $width-lazy-img !important;
+  margin-left: auto;
+  margin-right: auto;
+  background: $bg-color-header;
+  border: 1px transparent;
+  margin: 10vh auto;
+  text-align: center;
+  display: block;
+}
+.lazy-img-fadein[lazy-progressive=true] {
+  width: $width-header;
+  margin: auto;
+}
+.lazy-img-fadein[lazy=error] {
+  border-radius: 2px;
   -webkit-animation-duration: $time-animation;
   animation-duration: $time-animation;
   -webkit-animation-fill-mode: both;
@@ -90,4 +115,10 @@ to {
 	width: $width-header;
 	background: $font-color-header;
 	padding: $padding-login;
+}
+.content-image {
+	position: relative;
+    background: $bg-color-header;
+    box-sizing: border-box;
+    text-align: center;
 }

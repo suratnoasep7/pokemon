@@ -13,6 +13,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/subtype/'">{{ msgsubtipe }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/supertype/'">{{ msgsupertipe }}
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" v-bind:href="'/#/login/'">{{ msgLogin }}</a>
             </li>
           </ul>
@@ -36,7 +44,7 @@
         <div class="col-lg-4 col-md-4 col-sm-6 portfolio-item text-center" v-for="item in response">
           <div class="card h-100">
             <div class="card-body">
-              <h2><a v-bind:href="'/#/singleimage/'+ $attrs.type + '/' + $attrs.subtype + '/' + item">{{ item }}</a></h2>
+              <h2><a v-bind:href="'/#/supertypepokemon/'+ item">{{ item }}</a></h2>
             </div>
           </div>
         </div>
@@ -54,6 +62,8 @@ export default {
       msgHome: 'Super Tipe Pokemon',
       msg: 'Pokemon',
       msgtipe: 'Tipe Pokemon',
+      msgsubtipe: 'SubTipe Pokemon',
+      msgsupertipe: 'SuperTipe Pokemon',
       msgLogin: 'Login',
       loading: true,
       response: [],

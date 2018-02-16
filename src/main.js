@@ -11,8 +11,8 @@ import VueLazyload from 'vue-lazyload'
 Vue.config.productionTip = false
 Vue.use(VueLazyload, {
   lazyComponent: true,
-  preLoad: 2,
-  loading: './assets/loader-large.gif',
+  preLoad: 1.3,
+  loading: 'http://hilongjw.github.io/vue-lazyload/dist/loading-spin.svg',
   attempt: 1
 })
 

@@ -8,6 +8,9 @@ import SingleImage from '@/components/SingleImage'
 import DetailImage from '@/components/DetailImage'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import TypePokemon from '@/components/TypePokemon'
+import SubTypePokemon from '@/components/SubTypePokemon'
+import SuperTypePokemon from '@/components/SuperTypePokemon'
 
 Vue.use(Router)
 
@@ -24,13 +27,13 @@ export default new Router({
       component: Type
     },
     {
-      path: '/subtype/:type',
+      path: '/subtype/',
       name: 'SubType',
       component: SubType,
       props: true
     },
     {
-      path: '/supertype/:type/:subtype',
+      path: '/supertype/',
       name: 'SuperType',
       component: SuperType,
       props: true
@@ -55,6 +58,21 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/typepokemon/:type',
+      name: 'TypePokemon',
+      component: TypePokemon
+    },
+    {
+      path: '/subtypepokemon/:subtype',
+      name: 'SubTypePokemon',
+      component: SubTypePokemon
+    },
+    {
+      path: '/supertypepokemon/:supertype',
+      name: 'SuperTypePokemon',
+      component: SuperTypePokemon
     }
   ]
 })

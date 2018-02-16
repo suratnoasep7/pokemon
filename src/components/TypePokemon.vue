@@ -31,8 +31,7 @@
     <div class="container margin-content">
       <div class="col-md-12">
         <h1>{{ msg }}</h1>
-        <p>{{ msgTipe }} - {{ $attrs.type}} / {{ msgSubTipe }} - {{ $attrs.subtype }} / {{ msgSuperTipe }} - {{ $attrs.supertype }}</p>
-        <p></p>
+        <p>{{ msgTipe }} - {{ tipepokemon }}</p>
       </div>
       <div class="col-md-12 margin-content">
         <div v-if="loading" class="loader text-center">
@@ -100,7 +99,7 @@
 import {AXIOS} from './http-common'
 
 export default {
-  name: 'Type',
+  name: 'TypePokemon',
   data () {
     return {
       msg: 'Pokemon',
@@ -118,7 +117,6 @@ export default {
       msgCari: 'Cari',
       loading: true,
       datatextcards: false,
-      textcards: '',
       selectedtipe: '',
       selectedsubtipe: '',
       selectedsupertipe: '',
@@ -129,32 +127,26 @@ export default {
       errors: [],
       errorsoptions: [],
       errorsoptionssubtipe: [],
-      errorsoptionssupertipe: []
+      errorsoptionssupertipe: [],
+      tipepokemon: '',
+      textcards: ''
     }
   },
   created () {
-    if (this.$route.params.type == "") {
-      this.$router.push({path: '/type'});
+    console.log(this.$route.params.type)
+    if (this.$route.params.type !== "") {
+      this.callRestService(this.$route.params.type)
+      this.tipepokemon = this.$route.params.type
     } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
-    }
-    if (this.$route.params.subtype == "") {
-      this.$router.push({path: '/type'});
-    } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
-    }
-    if (this.$route.params.supertype == "") {
-      this.$router.push({path: '/type'});
-    } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
+      this.$router.push({path: '/type'})
     }    
   },
   watch: {
     '$route': 'callRestService'
   },
   methods: {
-    callRestService (type, subtype, supertype) {
-      AXIOS.get('cards?types='+type+'&subtype='+subtype+'&supertype='+supertype).then(
+    callRestService (type) {
+      AXIOS.get('cards?types='+type).then(
         response => {
           if (response.data.cards.length == 0) {
             this.datatextcards = true

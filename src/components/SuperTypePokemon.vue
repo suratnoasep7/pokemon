@@ -31,8 +31,7 @@
     <div class="container margin-content">
       <div class="col-md-12">
         <h1>{{ msg }}</h1>
-        <p>{{ msgTipe }} - {{ $attrs.type}} / {{ msgSubTipe }} - {{ $attrs.subtype }} / {{ msgSuperTipe }} - {{ $attrs.supertype }}</p>
-        <p></p>
+        <p>{{ msgTipe }} - {{ supertypepokemon }}</p>
       </div>
       <div class="col-md-12 margin-content">
         <div v-if="loading" class="loader text-center">
@@ -129,32 +128,24 @@ export default {
       errors: [],
       errorsoptions: [],
       errorsoptionssubtipe: [],
-      errorsoptionssupertipe: []
+      errorsoptionssupertipe: [],
+      supertypepokemon: ''
     }
   },
   created () {
-    if (this.$route.params.type == "") {
-      this.$router.push({path: '/type'});
+    if (this.$route.params.supertype !== "") {
+      this.callRestService(this.$route.params.supertype)
+      this.supertypepokemon = this.$route.params.supertype
     } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
-    }
-    if (this.$route.params.subtype == "") {
-      this.$router.push({path: '/type'});
-    } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
-    }
-    if (this.$route.params.supertype == "") {
-      this.$router.push({path: '/type'});
-    } else {
-      this.callRestService(this.$route.params.type, this.$route.params.subtype, this.$route.params.supertype)
+      this.$router.push({path: '/supertype'})
     }    
   },
   watch: {
     '$route': 'callRestService'
   },
   methods: {
-    callRestService (type, subtype, supertype) {
-      AXIOS.get('cards?types='+type+'&subtype='+subtype+'&supertype='+supertype).then(
+    callRestService (supertype) {
+      AXIOS.get('cards?supertype='+supertype).then(
         response => {
           if (response.data.cards.length == 0) {
             this.datatextcards = true

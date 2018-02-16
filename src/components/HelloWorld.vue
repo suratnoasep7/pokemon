@@ -13,6 +13,14 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/subtype/'">{{ msgsubtipe }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" v-bind:href="'/#/supertype/'">{{ msgsupertipe }}
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" v-bind:href="'/#/login/'">{{ msgLogin }}</a>
             </li>
           </ul>
@@ -62,7 +70,7 @@
       <div class="row text-center text-lg-left">
         <div class="col-lg-3 col-md-4 col-xs-6" v-for="item in response">
           <a v-bind:href="'/#/detailimage/'+ item.id" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail lazy-img-fadein" alt="item.name" v-lazy='item.imageUrl' lazy="loaded">
+            <img class="img-fluid img-thumbnail lazy-img-fadein" alt="item.name" v-lazy='item.imageUrl' lazy="loading">
           </a>
         </div>
       </div>
@@ -80,6 +88,9 @@ export default {
     return {
       msg: 'Pokemon',
       msglogin: 'Login',
+      msgtipe: 'Tipe Pokemon',
+      msgsubtipe: 'SubTipe Pokemon',
+      msgsupertipe: 'SuperTipe Pokemon',
       msgPilihTipe: 'Pilih Tipe',
       msgSubTipe: 'Pilih Sub Tipe',
       msgtipe: 'Tipe Pokemon',
@@ -151,7 +162,13 @@ export default {
       )
     },
     searchPokemon(type, subtype, supertype) {
-      if (type !== "" && subtype !== "" && supertype !== "") {
+      if (type !== "" && subtype == "" && supertype == "") {
+        this.$router.push({path: '/typepokemon/'+type})
+      } else if (type == "" && subtype !== "" && supertype == "") {
+        this.$router.push({path: '/subtypepokemon/'+subtype})
+      } else if (type == "" && subtype == "" && supertype !== "") {
+        this.$router.push({path: '/supertypepokemon/'+subtype})
+      } else if (type !== "" && subtype !== "" && supertype !== "") {
         this.$router.push({path: '/singleimage/'+type+'/'+subtype+'/'+supertype})
       } else {
         alert('Pilih Pencarian')
