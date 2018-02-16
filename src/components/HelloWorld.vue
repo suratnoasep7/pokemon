@@ -42,14 +42,14 @@
     </div>
     <div class="container margin-content">
       <div v-if="loading" class="loader text-center">
-        <img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="loader">
+        <img src="./../assets/loader-large.gif" alt="loader">
       </div>
     </div>
     <div class="container margin-content" v-if="!loading">
       <div class="row text-center text-lg-left">
         <div class="col-lg-3 col-md-4 col-xs-6" v-for="item in response">
           <a v-bind:href="'/#/detailimage/'+ item.id" class="d-block mb-4 h-100">
-            <img class="img-fluid img-thumbnail" v-lazy="item.imageUrl" alt="item.name">
+            <img class="img-fluid img-thumbnail lazy-img-fadein" alt="item.name" v-lazy='item.imageUrl' lazy="loaded">
           </a>
         </div>
       </div>

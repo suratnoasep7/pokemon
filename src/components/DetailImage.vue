@@ -6,24 +6,26 @@
         <a class="btn btn-primary" v-bind:href="'/#/'">Home</a>
       </div>
     </nav>
-    <div class="container margin-content">
+    <div class="container">
+      <div class="col-md-12 margin-content">
+        <div v-if="loading" class="loader text-center">
+          <img src="./../assets/loader-large.gif" alt="loader">
+        </div>
+      </div>
+    </div>
+    <div class="container margin-content" v-if="!loading">
       <div class="col-md-12">
         <h1>{{ msg }} {{ response.name }}</h1>
       </div>
-      <div class="col-md-12 margin-content">
-        <div v-if="loading" class="loader text-center">
-          <img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="loader">
-        </div>
-      </div>
-      <div class="col-md-12 margin-content">
+      
+      <div class="col-md-12 margin-content" v-if="!loading">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-8" v-if="loading">
             <div class="row">
               <div class="col-md-4">
-                <img class="img-fluid rounded mb-3 mb-md-0" v-lazy="response.imageUrl">
+                <img class="img-fluid rounded mb-3 mb-md-0 lazy-img-fadein" v-lazy="response.imageUrl">
               </div>
               <div class="col-md-8">
-                <h2>Project One</h2>
                 <p>Artist - {{ response.artist }}</p>
                 <p>Rarity - {{ response.rarity }}</p>
                 <p>Series - {{ response.series }}</p>

@@ -2,7 +2,7 @@
   <div class="hello">
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Pokemon</a>
+        <a class="navbar-brand" v-bind:href="'/#/'">Pokemon</a>
         <a class="btn btn-primary" v-bind:href="'/#/'">Home</a>
       </div>
     </nav>
@@ -15,7 +15,7 @@
     </div>
     <div class="container margin-content">
       <div v-if="loading" class="loader text-center">
-        <img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="loader">
+        <img src="./../assets/loader-large.gif" alt="loader">
       </div>
     </div>
     <div class="container margin-content" v-if="!loading">

@@ -10,6 +10,7 @@ $font-size-portfolio: 1.2rem;
 $margin-top-content: 20px;
 $margin-header-font: 0px 0px 20px;
 $padding-loader: 40px;
+$time-animation: 1s;
 
 .header {
 	height: $height-header;
@@ -47,4 +48,28 @@ $padding-loader: 40px;
 }
 .loader {
 	padding: $padding-loader;
+}
+@-webkit-keyframes fadeIn {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+@keyframes fadeIn {
+from {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+.lazy-img-fadein[lazy=loaded] {
+  -webkit-animation-duration: $time-animation;
+  animation-duration: $time-animation;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }

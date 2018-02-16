@@ -2,7 +2,7 @@
   <div class="hello">
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Pokemon</a>
+        <a class="navbar-brand" v-bind:href="'/#/'">Pokemon</a>
         <a class="btn btn-primary" v-bind:href="'/#/'">Home</a>
       </div>
     </nav>
@@ -15,16 +15,16 @@
       </div>
       <div class="col-md-12 margin-content">
         <div v-if="loading" class="loader text-center">
-          <img src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="loader">
+         <img src="./../assets/loader-large.gif" alt="loader">
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-8" v-if="!loading"></div>>
+      <div class="row" v-if="!loading">
+        <div class="col-md-8">
           <div class="col-md-12 margin-content" v-for="item in response">
             <div class="row">
               <div class="col-md-4">
                 <a v-bind:href="'/#/detailimage/'+ item.id">
-                  <img class="img-fluid rounded mb-3 mb-md-0" v-lazy="item.imageUrl">
+                  <img class="img-fluid rounded mb-3 mb-md-0 lazy-img-fadein" v-lazy="item.imageUrl">
                 </a>
               </div>
               <div class="col-md-8">

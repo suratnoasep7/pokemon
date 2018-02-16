@@ -4,15 +4,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import BootstrapVue from 'bootstrap-vue'
 import VueLazyload from 'vue-lazyload'
 
 
 
 Vue.config.productionTip = false
-Vue.use(BootstrapVue)
 Vue.use(VueLazyload, {
-  lazyComponent: true
+  lazyComponent: true,
+  preLoad: 2,
+  loading: './assets/loader-large.gif',
+  attempt: 1
 })
 
 /* eslint-disable no-new */
