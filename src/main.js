@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 Vue.use(VueLazyload, {
   lazyComponent: true,
   preLoad: 1.3,
+  error: 'http://hilongjw.github.io/vue-lazyload/dist/loading-spin.svg',
   loading: 'http://hilongjw.github.io/vue-lazyload/dist/loading-spin.svg',
   attempt: 1
 })
