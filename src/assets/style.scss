@@ -16,6 +16,7 @@ $header-top-login: 25vh;
 $header-left-login: 50vh;
 $padding-login: 20px;
 $width-lazy-img: 40px;
+$color-link: #007bff;
 
 .header {
 	height: $height-header;
@@ -121,4 +122,7 @@ to {
     background: $bg-color-header;
     box-sizing: border-box;
     text-align: center;
+}
+.page-link.active {
+	color: $color-link !important;
 }

@@ -52,7 +52,18 @@
                   <img class="img-fluid img-thumbnail lazy-img-fadein" alt="item.name" v-lazy='item.imageUrl' lazy="loading">
                 </a>
               </div>
-            </div>  
+            </div>
+            <div class="margin-content text-center" v-if="!loading">
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link">Previous</a></li>
+                  <li class="page-item" v-for="pageitem in page">
+                    <a v-on:click="getPage(tipepokemon, pageitem)" class="page-link">{{ pageitem }}</a>
+                  </li>
+                  <li class="page-item"><a class="page-link">Next</a></li>
+                </ul>
+              </nav>
+            </div> 
           </div>
         </div>
         <div class="col-md-4">
@@ -129,7 +140,8 @@ export default {
       errorsoptionssubtipe: [],
       errorsoptionssupertipe: [],
       tipepokemon: '',
-      textcards: ''
+      textcards: '',
+      page: ['1','2','3','4','5','6','7','8','9','10']
     }
   },
   created () {
@@ -193,6 +205,20 @@ export default {
           this.errorsoptionssupertipe.push(e)
         }
       )
+    },
+    getPage(type, page) {
+      this.loading = true
+      AXIOS.get('cards?types='+type+'&page='+page).then(
+        response => {
+          if (response.data.cards.length > 0) {
+            this.loading = false
+            this.response = response.data.cards
+          }      
+        }).catch(
+          e => {
+            this.errors.push(e)
+          }
+        )
     },
     searchPokemon(type, subtype, supertype) {
       if (type !== "" && subtype == "" && supertype == "") {

@@ -31,7 +31,7 @@
     <div class="container margin-content">
       <div class="col-md-12">
         <h1>{{ msg }}</h1>
-        <p>{{ msgTipe }} - {{ supertypepokemon }}</p>
+        <p>{{ msgsupertipe }} - {{ supertypepokemon }}</p>
       </div>
       <div class="col-md-12 margin-content">
         <div v-if="loading" class="loader text-center">
@@ -52,6 +52,17 @@
                   <img class="img-fluid img-thumbnail lazy-img-fadein" alt="item.name" v-lazy='item.imageUrl' lazy="loading">
                 </a>
               </div>
+            </div>
+            <div class="margin-content text-center" v-if="!loading">
+              <nav>
+                <ul class="pagination justify-content-center">
+                  <li class="page-item"><a class="page-link">Previous</a></li>
+                  <li class="page-item" v-for="pageitem in page">
+                    <a v-on:click="getPage(supertypepokemon, pageitem)" class="page-link">{{ pageitem }}</a>
+                  </li>
+                  <li class="page-item"><a class="page-link">Next</a></li>
+                </ul>
+              </nav>
             </div>  
           </div>
         </div>
@@ -104,8 +115,8 @@ export default {
     return {
       msg: 'Pokemon',
       msgtipe: 'Tipe Pokemon',
-      msgsubtipe: 'SubTipe Pokemon',
-      msgsupertipe: 'SuperTipe Pokemon',
+      msgsubtipe: 'Sub Tipe Pokemon',
+      msgsupertipe: 'Super Tipe Pokemon',
       msgTipe: 'Tipe',
       msgLogin: 'Login',
       msgAttack: 'Attack',
@@ -129,7 +140,8 @@ export default {
       errorsoptions: [],
       errorsoptionssubtipe: [],
       errorsoptionssupertipe: [],
-      supertypepokemon: ''
+      supertypepokemon: '',
+      page: ['1','2','3','4','5','6','7','8','9','10']
     }
   },
   created () {
@@ -192,6 +204,20 @@ export default {
           this.errorsoptionssupertipe.push(e)
         }
       )
+    },
+    getPage(supertype, page) {
+      this.loading = true
+      AXIOS.get('cards?supertype='+supertype+'&page='+page).then(
+        response => {
+          if (response.data.cards.length > 0) {
+            this.loading = false
+            this.response = response.data.cards
+          }      
+        }).catch(
+          e => {
+            this.errors.push(e)
+          }
+        )
     },
     searchPokemon(type, subtype, supertype) {
       if (type !== "" && subtype == "" && supertype == "") {

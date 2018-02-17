@@ -74,13 +74,23 @@
           </a>
         </div>
       </div>
+      <div class="container margin-content text-center" v-if="!loading">
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link">Previous</a></li>
+            <li class="page-item" v-for="pageitem in page">
+              <a v-on:click="getPage(pageitem)" class="page-link">{{ pageitem }}</a>
+            </li>
+            <li class="page-item"><a class="page-link">Next</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import {AXIOS} from './http-common'
-import VuePaginator from 'vuejs-paginator'
 
 export default {
   name: 'HelloWorld',
@@ -109,7 +119,9 @@ export default {
       errorsoptions: [],
       errorsoptionssubtipe: [],
       errorsoptionssupertipe: [],
-      loading: true
+      pagefirst: '1',
+      loading: true,
+      page: ['1','2','3','4','5','6','7','8','9','10']
     }
   },
   created () {
@@ -120,7 +132,7 @@ export default {
   },
   methods: {    
     callRestService () {
-      AXIOS.get('cards?abilityName=&abilityText=&abilityType=&ancientTrait=&artist=&attackCost=&attackDamage=&attackName=&attackText=&contains=&hp=&id=&name=&nationalPokedexNumber=&number=&page=&pageSize=&rarity=&resistances=&retreatCost=&series=&set=&setCode=&subtype=&supertype=&text=&types=&weaknesses=').then(
+      AXIOS.get('cards?abilityName=&abilityText=&abilityType=&ancientTrait=&artist=&attackCost=&attackDamage=&attackName=&attackText=&contains=&hp=&id=&name=&nationalPokedexNumber=&number=&page='+this.pagefirst+'&pageSize=&rarity=&resistances=&retreatCost=&series=&set=&setCode=&subtype=&supertype=&text=&types=&weaknesses=').then(
         response => {
           if (response.data.cards.length > 0) {
             this.loading = false
@@ -160,6 +172,20 @@ export default {
           this.errorsoptionssupertipe.push(e)
         }
       )
+    },
+    getPage(page) {
+      this.loading = true
+      AXIOS.get('cards?abilityName=&abilityText=&abilityType=&ancientTrait=&artist=&attackCost=&attackDamage=&attackName=&attackText=&contains=&hp=&id=&name=&nationalPokedexNumber=&number=&page='+page+'&pageSize=&rarity=&resistances=&retreatCost=&series=&set=&setCode=&subtype=&supertype=&text=&types=&weaknesses=').then(
+        response => {
+          if (response.data.cards.length > 0) {
+            this.loading = false
+            this.response = response.data.cards
+          }      
+        }).catch(
+          e => {
+            this.errors.push(e)
+          }
+        )
     },
     searchPokemon(type, subtype, supertype) {
       if (type !== "" && subtype == "" && supertype == "") {
