@@ -93,6 +93,7 @@ to {
 .lazy-img-fadein[lazy-progressive=true] {
   width: $width-header;
   margin: auto;
+
 }
 .lazy-img-fadein[lazy=error] {
   border-radius: 2px;
@@ -102,6 +103,14 @@ to {
   animation-fill-mode: both;
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+  margin-left: auto;
+  margin-right: auto;
+  background: $bg-color-header;
+  border: 1px transparent;
+  margin: 10vh auto;
+  text-align: center;
+  display: block;
+  width: $width-header;
 }
 .login {
 	min-height: $login-height;
