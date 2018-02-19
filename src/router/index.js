@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/Home'
 import Type from '@/components/Type'
 import SubType from '@/components/SubType'
 import SuperType from '@/components/SuperType'
@@ -11,6 +11,7 @@ import Register from '@/components/Register'
 import TypePokemon from '@/components/TypePokemon'
 import SubTypePokemon from '@/components/SubTypePokemon'
 import SuperTypePokemon from '@/components/SuperTypePokemon'
+import Search from '@/components/Search'
 
 Vue.use(Router)
 
@@ -18,8 +19,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
     },
     {
       path: '/type',
@@ -73,6 +74,12 @@ export default new Router({
       path: '/supertypepokemon/:supertype',
       name: 'SuperTypePokemon',
       component: SuperTypePokemon
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
+      props: (route) => ({ query: route.query.type}, { query: route.query.subtype}, { query: route.query.supertype})
     }
   ]
 })

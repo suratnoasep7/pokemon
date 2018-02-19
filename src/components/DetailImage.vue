@@ -53,16 +53,6 @@
                 <p v-for="item in response.text">{{ item }}</p>
               </div>  
             </div>
-            <!-- <div class="col-md-12 margin-content">
-                          <div v-if="loadingdetail" class="loader text-center">
-                            <img src="./../assets/loader-large.gif" alt="loader">
-                          </div>
-                        </div>
-                        <div class="col-lg-3 col-md-4 col-xs-6" v-for="itemdetail in responsedetail" v-if="!loadingdetail">
-                          <a v-bind:href="'/#/detailimage/'+ itemdetail.id" class="d-block mb-4 h-100">
-                            <img class="img-fluid img-thumbnail lazy-img-fadein" alt="itemdetail.name" v-lazy='itemdetail.imageUrl' lazy="loaded">
-                          </a>
-                        </div> -->   
           </div>
           <div class="col-md-4">
             <div class="card my-4">
@@ -114,8 +104,8 @@ export default {
     return {
       msg: 'Pokemon',
       msgtipe: 'Tipe Pokemon',
-      msgsubtipe: 'SubTipe Pokemon',
-      msgsupertipe: 'SuperTipe Pokemon',
+      msgsubtipe: 'Sub Tipe Pokemon',
+      msgsupertipe: 'Super Tipe Pokemon',
       msgLogin: 'Login',
       msgPilihTipe: 'Pilih Tipe',
       msgSubTipe: 'Pilih Sub Tipe',

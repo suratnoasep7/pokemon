@@ -115,12 +115,9 @@ export default {
     return {
       msg: 'Pokemon',
       msgtipe: 'Tipe Pokemon',
-      msgsubtipe: 'SubTipe Pokemon',
-      msgsupertipe: 'SuperTipe Pokemon',
+      msgsubtipe: 'Sub Tipe Pokemon',
+      msgsupertipe: 'Super Tipe Pokemon',
       msgTipe: 'Tipe',
-      msgLogin: 'Login',
-      msgAttack: 'Attack',
-      msgWeak: 'Weaknesses',
       msgView: 'View Pokemon',
       msgPilihTipe: 'Pilih Tipe',
       msgSubTipe: 'Pilih Sub Tipe',
@@ -145,7 +142,7 @@ export default {
     }
   },
   created () {
-    console.log(this.$route.params.type)
+    
     if (this.$route.params.type !== "") {
       this.callRestService(this.$route.params.type)
       this.tipepokemon = this.$route.params.type
