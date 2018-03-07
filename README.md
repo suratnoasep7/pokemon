@@ -1,6 +1,6 @@
 # Pokemon
 
-Portal Pokemon Menggunakan Vue JS
+Portal Pokemon 
 
 ## Getting Started
 
